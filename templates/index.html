@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Image</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row justify-content-centre">
+        <div class="col-sm-6">
+            <form action="/uploads" method="POST" enctype="multipart/form-data">
+
+                 <div class="form-group">
+                   <label for="file">Image:</label>
+                   <input type="file" class="form-control" accept="image/*" id="file" placeholder="Enter file" name="files" multiple>
+                 </div>
+                    
+                 <button type="submit" class="btn btn-default">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-8">
+        {% for file in files %}
+        <div class="cols-sm-4">
+            <h5>{{ file.filename }}</h5>
+            <img src="{{ url_for('uploaded_file', filename = file.filename)}}" class="img img-thumbnail"/>
+            <a href="{{ url_for('delete', file_id=file.id)}}" class="btn btn-sm btn-danger">Delete</a>
+            
+        </div>
+        {% endfor %}
+    </div>
+  
+</div>
+
+</body>
+</html>
